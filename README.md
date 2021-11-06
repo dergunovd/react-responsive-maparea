@@ -1,6 +1,6 @@
 # react-responsive-maparea
 
-> Simple React library for responsive map-area HTML-tags
+> React component for responsive map-area HTML-tags
 
 [![NPM](https://img.shields.io/npm/v/react-responsive-maparea.svg)](https://www.npmjs.com/package/react-responsive-maparea) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -9,22 +9,46 @@
 ```bash
 npm install --save react-responsive-maparea
 ```
+```bash
+yarn add react-responsive-maparea
+```
 
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import React, { Component, useRef } from 'react'
+import { Map, Area } from 'react-responsive-maparea'
 
-import MyComponent from 'react-responsive-maparea'
-import 'react-responsive-maparea/dist/index.css'
+const Example = () => {
+  const imgRef = useRef<HTMLImageElement>(null);
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+  return (
+    <div>
+      <Map name='map' imgRef={imgRef}>
+        <Area
+          shape='rect'
+          coords='0,0,100,50'
+          href='https://google.com'
+        />
+      </Map>
+      <img
+        ref={imgRef}
+        useMap='#map'
+        src={img}
+        alt='MDN infographic resize'
+        style={{ width: 200, height: 100 }}
+      />
+    </div>
+  )
 }
 ```
 
+## Possible problems
+```tsx
+<Area shape='circle'/>
+```
+Correct works only with saving original aspect ratio
+
 ## License
 
-MIT © [dergunovd](https://github.com/dergunovd)
+GNU GENERAL PUBLIC LICENSE © [dergunovd](https://github.com/dergunovd)
